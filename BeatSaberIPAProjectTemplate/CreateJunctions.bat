@@ -11,6 +11,7 @@ echo Source target: %SourcePath%
 echo Link target: %DestPath%
 set PluginPath=%SourcePath%\Plugins
 set ManagedPath=%SourcePath%\Beat Saber_Data\Managed
+set LibsPath=%SourcePath%\Libs
 
 if exist "%PluginPath%" (
 	echo Plugin folder exists, creating link
@@ -25,6 +26,13 @@ if exist "%ManagedPath%" (
 	mklink /J "%DestPath%References\Managed" "%ManagedPath%"
 ) else (
 	echo Managed folder missing
+)
+if exist "%LibsPath%" (
+	echo Libs folder exists, creating link
+	if not exist "%DestPath%References" mkdir "%DestPath%References"
+	mklink /J "%DestPath%References\Libs" "%LibsPath%"
+) else (
+	echo Libs folder missing
 )
 
 :End
